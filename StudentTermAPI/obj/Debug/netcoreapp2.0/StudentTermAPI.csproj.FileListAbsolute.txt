@@ -1,0 +1,11 @@
+C:\Users\chriwong\source\repos\StudentTermAPI\StudentTermAPI\bin\Debug\netcoreapp2.0\StudentTermAPI.deps.json
+C:\Users\chriwong\source\repos\StudentTermAPI\StudentTermAPI\bin\Debug\netcoreapp2.0\StudentTermAPI.runtimeconfig.json
+C:\Users\chriwong\source\repos\StudentTermAPI\StudentTermAPI\bin\Debug\netcoreapp2.0\StudentTermAPI.runtimeconfig.dev.json
+C:\Users\chriwong\source\repos\StudentTermAPI\StudentTermAPI\bin\Debug\netcoreapp2.0\StudentTermAPI.dll
+C:\Users\chriwong\source\repos\StudentTermAPI\StudentTermAPI\bin\Debug\netcoreapp2.0\StudentTermAPI.pdb
+C:\Users\chriwong\source\repos\StudentTermAPI\StudentTermAPI\obj\Debug\netcoreapp2.0\StudentTermAPI.csprojResolveAssemblyReference.cache
+C:\Users\chriwong\source\repos\StudentTermAPI\StudentTermAPI\obj\Debug\netcoreapp2.0\StudentTermAPI.csproj.CoreCompileInputs.cache
+C:\Users\chriwong\source\repos\StudentTermAPI\StudentTermAPI\obj\Debug\netcoreapp2.0\StudentTermAPI.AssemblyInfoInputs.cache
+C:\Users\chriwong\source\repos\StudentTermAPI\StudentTermAPI\obj\Debug\netcoreapp2.0\StudentTermAPI.AssemblyInfo.cs
+C:\Users\chriwong\source\repos\StudentTermAPI\StudentTermAPI\obj\Debug\netcoreapp2.0\StudentTermAPI.dll
+C:\Users\chriwong\source\repos\StudentTermAPI\StudentTermAPI\obj\Debug\netcoreapp2.0\StudentTermAPI.pdb
