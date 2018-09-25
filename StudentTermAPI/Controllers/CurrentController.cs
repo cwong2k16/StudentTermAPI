@@ -6,10 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace StudentTermAPI.Controllers
 {
-    [Route("term/current")]
+    [Route("term")]
     public class CurrentController: Controller
     {
-        [HttpGet()]
+        [HttpGet("current")]
         public JsonResult GetTerms()
         {
             string month = DateTime.Now.ToString("MMMM");
