@@ -14,9 +14,8 @@ namespace StudentTermAPI.Controllers
         {
             string month = DateTime.Now.ToString("MMMM");
 
-            return new JsonResult(CurrentDataStore.Current.Terms.FirstOrDefault(
-                c=>c.Months.Contains(month)));
+            return new JsonResult(CurrentDataStore.Current.Terms.Where(
+                t => t.Months.Contains(month)));
         }
-
     }
 }
