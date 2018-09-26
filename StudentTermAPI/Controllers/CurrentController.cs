@@ -17,5 +17,12 @@ namespace StudentTermAPI.Controllers
             return new JsonResult(CurrentDataStore.Current.Terms.Where(
                 t => t.Months.Contains(month)));
         }
+
+        [HttpGet("{date:datetime:regex(\\d{{4}}-\\d{{2}}-\\d{{2}})}")]
+        public DateTime GetString(DateTime date)
+        {
+            return date;
+        }
+
     }
 }
