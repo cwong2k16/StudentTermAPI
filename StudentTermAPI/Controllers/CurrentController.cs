@@ -70,12 +70,12 @@ namespace StudentTermAPI.Controllers
 
             return new JObject(new JProperty("term", month));
         }
-        
-        ///* Route for feature 4 */
-        //[HttpGet("{termstring:string}")]
-        //public JObject GetCode(string termstring)
-        //{
 
-        //}
+        /* Route for feature 4 */
+        [HttpGet("{termstring}")]
+        public string GetCode(string termstring)
+        {
+            return "ok";
+        }
     }
 }
