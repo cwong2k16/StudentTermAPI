@@ -60,12 +60,22 @@ namespace StudentTermAPI.Controllers
             int yearOffset = termcode / 10;
             int yearResult = 1900 + yearOffset;
 
-            if (yearResult < 1957 || yearResult > 2018)
+            string currentYearString = DateTime.Now.ToString("yyyy");
+            long currentYearInt = long.Parse(currentYearString);
+
+            if (yearResult < 1957 || yearResult > currentYearInt)
             {
                 return new JObject(new JProperty("error", "invalid year"));
             }
 
             return new JObject(new JProperty("term", month));
         }
+        
+        ///* Route for feature 4 */
+        //[HttpGet("{termstring:string}")]
+        //public JObject GetCode(string termstring)
+        //{
+
+        //}
     }
 }
