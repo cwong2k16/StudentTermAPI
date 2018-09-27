@@ -54,7 +54,6 @@ namespace StudentTermAPI.Controllers
                     month = "Fall";
                     break;
                 default:
-                    month = "invalid";
                     return new JObject(new JProperty("error", "invalid month"));
             }
 
