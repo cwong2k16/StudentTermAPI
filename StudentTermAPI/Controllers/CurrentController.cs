@@ -75,21 +75,61 @@ namespace StudentTermAPI.Controllers
         [HttpGet("{termstring}")]
         public string GetCode(string termstring)
         {
-            // ex: Fall2018, spring1970, Winter2000, summer2017, etc.
+            int term = 0;
+            int year = 0;
+            string yearStr = "";
+
+            /* ex: Fall2018, spring1970, Winter2000, summer2017, etc.
+             * with this format, length can only be 8 or 10.
+             * If 8, then first 4 characters can only spell out "Fall", followed by 4 numbers (year)
+             * Else if 10, then first 6 characters can only spell out "Winter", or "Spring" or "Summer", followed by 4 numbers (year)
+             */
             if (termstring.Length == 8)
             {
                 if(termstring.Substring(0, 4).Equals("Fall"))
                 {
-
+                    term = 8;
+                    yearStr = termstring.Substring(4);
                 }
-                return "invalid";
             } 
 
             else if (termstring.Length == 10)
             {
-
+                string termStr = termstring.Substring(0, 6);
+                switch (termStr)
+                {
+                    case "Winter":
+                        term = 1;
+                        break;
+                    case "Spring":
+                        term = 4;
+                        break;
+                    case "Summer":
+                        term = 6;
+                        break;
+                    default:
+                        return "invalid";
+                }
+                yearStr = termstring.Substring(6);
             }
 
+            if (yearStr.All(char.IsDigit))
+            {
+                int num = 0;
+                try
+                {
+                    num = Int32.Parse(yearStr);
+                }
+                catch (Exception e)
+                {
+                    return "invalid " + "\nFormat: Fall2018, Winter2000, Spring1999, Summer1967, etc";
+                }
+
+                if (num >= 1957 && num <= 2018)
+                {
+                    return (num-1900) * 10 + term + "";
+                }
+            }
             return "invalid";
         }
     }
