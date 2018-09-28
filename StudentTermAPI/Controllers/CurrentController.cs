@@ -85,7 +85,7 @@ namespace StudentTermAPI.Controllers
              */
             if (termstring.Length == 8)
             {
-                if(termstring.Substring(0, 4).Equals("Fall"))
+                if(termstring.Substring(0, 4).ToLower().Equals("fall"))
                 {
                     term = 8;
                     yearStr = termstring.Substring(4);
@@ -94,16 +94,16 @@ namespace StudentTermAPI.Controllers
 
             else if (termstring.Length == 10)
             {
-                string termStr = termstring.Substring(0, 6);
+                string termStr = termstring.Substring(0, 6).ToLower();
                 switch (termStr)
                 {
-                    case "Winter":
+                    case "winter":
                         term = 1;
                         break;
-                    case "Spring":
+                    case "spring":
                         term = 4;
                         break;
-                    case "Summer":
+                    case "summer":
                         term = 6;
                         break;
                     default:
