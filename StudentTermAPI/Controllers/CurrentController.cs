@@ -73,10 +73,9 @@ namespace StudentTermAPI.Controllers
 
         /* Route for feature 4 */
         [HttpGet("{termstring}")]
-        public string GetCode(string termstring)
+        public JObject GetCode(string termstring)
         {
             int term = 0;
-            int year = 0;
             string yearStr = "";
 
             /* ex: Fall2018, spring1970, Winter2000, summer2017, etc.
@@ -108,7 +107,7 @@ namespace StudentTermAPI.Controllers
                         term = 6;
                         break;
                     default:
-                        return "invalid";
+                        return new JObject(new JProperty("error", "invalid"));
                 }
                 yearStr = termstring.Substring(6);
             }
@@ -122,15 +121,15 @@ namespace StudentTermAPI.Controllers
                 }
                 catch (Exception e)
                 {
-                    return "invalid " + "\nFormat: Fall2018, Winter2000, Spring1999, Summer1967, etc";
+                    return new JObject(new JProperty("error", "\nFormat: Fall2018, Winter2000, Spring1999, Summer1967, etc"));
                 }
 
                 if (num >= 1957 && num <= 2018)
                 {
-                    return (num-1900) * 10 + term + "";
+                    return new JObject(new JProperty("termcode", (num-1900) * 10 + term + ""));
                 }
             }
-            return "invalid";
+            return new JObject(new JProperty("error", "invalid"));
         }
     }
 }
