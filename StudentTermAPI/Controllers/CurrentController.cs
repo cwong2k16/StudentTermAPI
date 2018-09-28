@@ -75,7 +75,22 @@ namespace StudentTermAPI.Controllers
         [HttpGet("{termstring}")]
         public string GetCode(string termstring)
         {
-            return "ok";
+            // ex: Fall2018, spring1970, Winter2000, summer2017, etc.
+            if (termstring.Length == 8)
+            {
+                if(termstring.Substring(0, 4).Equals("Fall"))
+                {
+
+                }
+                return "invalid";
+            } 
+
+            else if (termstring.Length == 10)
+            {
+
+            }
+
+            return "invalid";
         }
     }
 }
