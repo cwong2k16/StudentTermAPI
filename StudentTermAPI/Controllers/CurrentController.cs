@@ -23,8 +23,8 @@ namespace StudentTermAPI.Controllers
         }
 
         /* Route for feature 2 */
-        [HttpGet("{date:datetime:regex(\\d{{4}}-\\d{{2}}-\\d{{2}})}")]
-        public JsonResult GetString(DateTime date)
+        [HttpGet("{date:datetime:regex(\\d{{2}}-\\d{{2}}-\\d{{4}})}")]
+        public object GetString(DateTime date)
         {
             int monthInt = date.Month;
             string monthString = DateTimeFormatInfo.CurrentInfo.GetMonthName(monthInt);
@@ -61,7 +61,7 @@ namespace StudentTermAPI.Controllers
             int yearResult = 1900 + yearOffset;
 
             string currentYearString = DateTime.Now.ToString("yyyy");
-            long currentYearInt = long.Parse(currentYearString);
+            Int32 currentYearInt = Int32.Parse(currentYearString);
 
             if (yearResult < 1957 || yearResult > currentYearInt)
             {
@@ -124,7 +124,10 @@ namespace StudentTermAPI.Controllers
                     return new JObject(new JProperty("error", "\nFormat: Fall2018, Winter2000, Spring1999, Summer1967, etc"));
                 }
 
-                if (num >= 1957 && num <= 2018)
+                string currentYearString = DateTime.Now.ToString("yyyy");
+                Int32 currentYearInt = Int32.Parse(currentYearString);
+
+                if (num >= 1957 && num <= currentYearInt)
                 {
                     return new JObject(new JProperty("termcode", (num-1900) * 10 + term + ""));
                 }
