@@ -37,6 +37,7 @@ namespace StudentTermAPI.Controllers
         [HttpGet("{termcode:int}")]
         public JObject GetTerm(int termcode)
         {
+            // last digit in the term code is the month (1 = Winter, 4, = Spring, 6 = Summer, 8 = Fall)
             int mod = termcode % 10;
             string month = "";
             switch (mod)
@@ -54,15 +55,19 @@ namespace StudentTermAPI.Controllers
                     month = "Fall";
                     break;
                 default:
+                    // if it's not in 1, 4, 6, or 8, this is an invalid term month.
                     return new JObject(new JProperty("error", "invalid month"));
             }
 
+            // the year is the first 3 numbers, added with 1900. i.e. 118 + 1900, which is 2018.
             int yearOffset = termcode / 10;
             int yearResult = 1900 + yearOffset;
 
+            // check if it's within the range of 1957 (when Stony first opened, and current year)
             string currentYearString = DateTime.Now.ToString("yyyy");
             Int32 currentYearInt = Int32.Parse(currentYearString);
 
+            // if it's not within this range, return invalid year.
             if (yearResult < 1957 || yearResult > currentYearInt)
             {
                 return new JObject(new JProperty("error", "invalid year"));
@@ -78,52 +83,37 @@ namespace StudentTermAPI.Controllers
             int term = 0;
             string yearStr = "";
 
-            /* ex: Fall2018, spring1970, Winter2000, summer2017, etc.
-             * with this format, length can only be 8 or 10.
-             * If 8, then first 4 characters can only spell out "Fall", followed by 4 numbers (year)
-             * Else if 10, then first 6 characters can only spell out "Winter", or "Spring" or "Summer", followed by 4 numbers (year)
-             */
-            if (termstring.Length == 8)
+            /* ex: Fall-2018, spring-1970, Winter-2000, summer-2017, etc.
+             * split the String by delimiter "-"
+             * check if array[0] = Fall or Spring or Winter or Summer
+             * if not, return false, else continue
+             * check if array[1] is parseable as integer
+             * if not return false, else check if valid year
+            */
+            string [] arr = termstring.Split("-");
+            yearStr = arr[1];
+            arr[0] = arr[0].ToLower();
+            switch (arr[0])
             {
-                if(termstring.Substring(0, 4).ToLower().Equals("fall"))
-                {
+                case "winter":
+                    term = 1;
+                    break;
+                case "spring":
+                    term = 4;
+                    break;
+                case "summer":
+                    term = 6;
+                    break;
+                case "fall":
                     term = 8;
-                    yearStr = termstring.Substring(4);
-                }
-            } 
-
-            else if (termstring.Length == 10)
-            {
-                string termStr = termstring.Substring(0, 6).ToLower();
-                switch (termStr)
-                {
-                    case "winter":
-                        term = 1;
-                        break;
-                    case "spring":
-                        term = 4;
-                        break;
-                    case "summer":
-                        term = 6;
-                        break;
-                    default:
-                        return new JObject(new JProperty("error", "invalid"));
-                }
-                yearStr = termstring.Substring(6);
+                    break;
+                default:
+                    return new JObject(new JProperty("error", "invalid"));
             }
 
             if (yearStr.All(char.IsDigit))
             {
-                int num = 0;
-                try
-                {
-                    num = Int32.Parse(yearStr);
-                }
-                catch (Exception e)
-                {
-                    return new JObject(new JProperty("error", "\nFormat: Fall2018, Winter2000, Spring1999, Summer1967, etc"));
-                }
-
+                int num = Int32.Parse(yearStr);
                 string currentYearString = DateTime.Now.ToString("yyyy");
                 Int32 currentYearInt = Int32.Parse(currentYearString);
 

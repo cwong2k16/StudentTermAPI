@@ -31,7 +31,7 @@ The last digit represents the season:
 ### URL: /term/:term-string (string)
 This endpoint should return the term code for the provided term string.
 Format: {Term}{Year}
-ex: /term/Fall2016 will return: 
+ex: /term/Fall-2016 will return: 
 ```
 { 
   "termcode":"1158" 
