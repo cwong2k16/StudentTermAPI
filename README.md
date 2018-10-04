@@ -30,7 +30,7 @@ The last digit represents the season:
 ## Create Endpoint for Term from Term String
 ### URL: /term/:term-string (string)
 This endpoint should return the term code for the provided term string.
-Format: {Term}{Year}
+Format: {Term}-{Year}
 ex: /term/Fall-2016 will return: 
 ```
 { 
